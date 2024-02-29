@@ -1,10 +1,10 @@
 package com.example.bike.inftrastructure.rest.controller;
 
 import com.example.bike.application.service.impl.JwtServiceImpl;
-import com.example.bike.domain.exceptions.BikeException;
+import com.example.bike.domain.error.exceptions.BaseException;
 import com.example.bike.domain.model.LoginRequest;
 import com.example.bike.domain.model.LoginResponse;
-import com.example.bike.inftrastructure.rest.Api.AuthApi;
+import com.example.bike.inftrastructure.rest.api.AuthApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class AuthController implements AuthApi {
 
 
     @Override
-    public ResponseEntity<LoginResponse> authorize(LoginRequest login) throws BikeException {
+    public ResponseEntity<LoginResponse> authorize(LoginRequest login) throws BaseException {
         return ResponseEntity.ok(jwtService.authorize(login));
     }
 

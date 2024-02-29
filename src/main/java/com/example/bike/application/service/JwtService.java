@@ -8,6 +8,5 @@ public interface JwtService {
 
     LoginResponse authorize(LoginRequest login);
     LoginResponse refresh(Authentication auth, boolean rememberMe);
-
     LoginResponse buildToken(Authentication auth, boolean rememberMe);
 }

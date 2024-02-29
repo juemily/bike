@@ -1,7 +1,7 @@
 package com.example.bike.application.service;
 
 import com.example.bike.application.service.impl.Page;
-import com.example.bike.domain.exceptions.BikeException;
+import com.example.bike.domain.error.exceptions.BikeException;
 import com.example.bike.domain.model.Bike;
 
 import java.util.List;

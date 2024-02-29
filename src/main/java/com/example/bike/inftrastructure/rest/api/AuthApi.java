@@ -1,7 +1,7 @@
-package com.example.bike.inftrastructure.rest.Api;
+package com.example.bike.inftrastructure.rest.api;
 
 
-import com.example.bike.domain.exceptions.BikeException;
+import com.example.bike.domain.error.exceptions.BaseException;
 import com.example.bike.domain.model.LoginRequest;
 import com.example.bike.domain.model.LoginResponse;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AuthApi {
 
     @PostMapping("/authenticate")
-    ResponseEntity<LoginResponse> authorize(@Validated @RequestBody LoginRequest login) throws BikeException;
+    ResponseEntity<LoginResponse> authorize(@Validated @RequestBody LoginRequest login) throws BaseException;
 
     @PostMapping("/refresh")
     ResponseEntity<LoginResponse> refresh(Authentication auth, @RequestParam(required = false) boolean rememberMe);

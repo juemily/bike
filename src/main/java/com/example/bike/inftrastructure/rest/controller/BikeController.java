@@ -2,9 +2,9 @@ package com.example.bike.inftrastructure.rest.controller;
 
 import com.example.bike.application.service.BikeService;
 import com.example.bike.application.service.impl.Page;
-import com.example.bike.domain.exceptions.BikeException;
+import com.example.bike.domain.error.exceptions.BaseException;
 import com.example.bike.domain.model.Bike;
-import com.example.bike.inftrastructure.rest.Api.BikeApi;
+import com.example.bike.inftrastructure.rest.api.BikeApi;
 import com.example.bike.inftrastructure.rest.controller.pagination.HttpHeadersBuilder;
 import com.example.bike.inftrastructure.rest.controller.pagination.Range;
 import lombok.extern.slf4j.Slf4j;
@@ -41,18 +41,20 @@ public class BikeController implements BikeApi {
     }
 
     @Override
-    public ResponseEntity<Bike> createBike(Bike bike) throws BikeException {
+    public ResponseEntity<Bike> createBike(Bike bike) throws BaseException {
         log.debug("Create Bike Controller");
          return new ResponseEntity<>(service.create(bike), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<List<Bike>>  list(@RequestHeader(required = false, name = "Range") String requestRange,
-                                            @RequestParam Map<String, String> allRequestParams,
-                                            @RequestParam(value = "fields", required = false) String fields,
-                                            @RequestParam(value = "offset", required = false) Integer offset,
-                                            @RequestParam(value = "limit", required = false) Integer limit,
-                                            @RequestParam(value = "sort", required = false) String sort)throws BikeException {
+    public ResponseEntity<List<Bike>> list(
+            @RequestHeader(required = false, name = "Range") String requestRange,
+            @RequestParam Map<String, String> allRequestParams,
+            @RequestParam(value = "fields", required = false) String fields,
+            @RequestParam(value = "offset", required = false) Integer offset,
+            @RequestParam(value = "limit", required = false) Integer limit,
+            @RequestParam(value = "sort", required = false) String sort) throws BaseException {
+
         log.debug("list Bike Controller");
 
         int queryLimit = DEFAULT_PAGINATION_LIMIT;
@@ -81,18 +83,10 @@ public class BikeController implements BikeApi {
             queryLimit = limit;
         }
 
-        if (StringUtils.isNotBlank(fields)) {
-            attributesToMap = Set.of(StringUtils.split(fields, ","));
-        }
+        attributesToMap = StringUtils.isNotBlank(fields) ? Set.of(StringUtils.split(fields, ",")) : null;
+        sortValues = StringUtils.isNotBlank(sort) ? List.of(StringUtils.split(sort, ",")) : null;
 
-        if (StringUtils.isNotBlank(sort)) {
-            sortValues = List.of(StringUtils.split(sort, ","));
-        }
-
-        for (String name : queryParamNames) {
-            allRequestParams.remove(name);
-        }
-
+        queryParamNames.forEach(allRequestParams::remove);
 
         Page<Bike> page = service.list(queryOffset, queryLimit, attributesToMap, sortValues, allRequestParams);
 
@@ -114,4 +108,5 @@ public class BikeController implements BikeApi {
 
         return new ResponseEntity<>(page.getElementList(), httpHeaders, status);
     }
+
 }

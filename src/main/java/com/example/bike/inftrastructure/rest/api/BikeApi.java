@@ -1,6 +1,6 @@
-package com.example.bike.inftrastructure.rest.Api;
+package com.example.bike.inftrastructure.rest.api;
 
-import com.example.bike.domain.exceptions.BikeException;
+import com.example.bike.domain.error.exceptions.BaseException;
 import com.example.bike.domain.model.Bike;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +15,7 @@ public interface BikeApi {
 
     @PostMapping(value = "/bike", produces = {"application/json;charset=utf-8"}, consumes = {
             "application/json;charset=utf-8"})
-    ResponseEntity<Bike> createBike(@RequestBody Bike bike) throws BikeException;
+    ResponseEntity<Bike> createBike(@RequestBody Bike bike) throws BaseException;
 
     @GetMapping(value = "/bike",  produces = {"application/json;charset=utf-8"})
     ResponseEntity<List<Bike>> list(@RequestHeader(required = false, name = "Range") String requestRange,
@@ -23,5 +23,5 @@ public interface BikeApi {
                                     @RequestParam(value = "fields", required = false) String fields,
                                     @RequestParam(value = "offset", required = false) Integer offset,
                                     @RequestParam(value = "limit", required = false) Integer limit,
-                                    @RequestParam(value = "sort", required = false) String sort) throws BikeException;
+                                    @RequestParam(value = "sort", required = false) String sort) throws BaseException;
 }
