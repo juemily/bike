@@ -1,34 +1,26 @@
 package com.example.bike.inftrastructure.rest.controller;
 
 
-import com.example.bike.application.repository.BikeRepository;
-import com.example.bike.application.service.filter.GenericSpecificationBuilder;
-import com.example.bike.application.service.filter.SortBuilder;
 import com.example.bike.application.service.impl.BikeServiceImpl;
-import com.example.bike.application.service.impl.Page;
 import com.example.bike.domain.error.exceptions.BaseException;
-import com.example.bike.domain.error.exceptions.BikeException;
 import com.example.bike.domain.model.Bike;
 import com.example.bike.domain.model.Items;
 import com.example.bike.inftrastructure.dbo.BikeEntity;
 import com.example.bike.inftrastructure.dbo.ItemsEntity;
-import com.example.bike.inftrastructure.mapper.BikeMapper;
-import com.example.bike.inftrastructure.rest.controller.pagination.OffsetBasedPageRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 class BikeControllerTest {
     @InjectMocks
