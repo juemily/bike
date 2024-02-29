@@ -53,6 +53,7 @@ public class BikeController implements BikeApi {
                                             @RequestParam(value = "offset", required = false) Integer offset,
                                             @RequestParam(value = "limit", required = false) Integer limit,
                                             @RequestParam(value = "sort", required = false) String sort)throws BikeException {
+        log.debug("list Bike Controller");
 
         int queryLimit = DEFAULT_PAGINATION_LIMIT;
         int queryOffset = DEFAULT_PAGINATION_OFFSET;

@@ -30,6 +30,7 @@ public class BikeServiceImpl  implements BikeService {
 
     @Override
     public Bike create(Bike bike) throws BikeException {
+        log.info("create Bike");
         BikeEntity response =  repository.saveAndFlush(mapper.toEntity(bike));
         return mapper.toDto(response);
     }
@@ -37,6 +38,7 @@ public class BikeServiceImpl  implements BikeService {
     @Override
     @Cacheable("bike")
     public Page<Bike> list(Integer offset, Integer limit, Set<String> fields, List<String> sort, Map<String, String> filter) throws BikeException {
+        log.info("list Bike");
         SortBuilder sortBuilder = new SortBuilder();
         if (sort != null && !sort.isEmpty()) {
             for (String fieldName : sort) {

@@ -1,7 +1,7 @@
 package com.example.bike.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.UUID;
 public class Bike {
 
     private UUID id;
+    @NotNull
     private String name;
     private String description;
     private Double price;

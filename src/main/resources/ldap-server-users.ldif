@@ -1,0 +1,30 @@
+# Definición de la unidad organizativa (Organizational Unit)
+dn: dc=example,dc=com
+objectclass: top
+objectclass: domain
+dc: example
+
+# Definición de la unidad organizativa (Organizational Unit)
+dn: ou=people,dc=example,dc=com
+objectclass: organizationalUnit
+ou: people
+
+# Definición de un usuario
+dn: uid=john,ou=people,dc=example,dc=com
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+cn: John Doe
+sn: Doe
+uid: admin
+userPassword: goTeamBike!
+
+# Definición de otro usuario
+dn: uid=jane,ou=people,dc=example,dc=com
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+cn: Jane Smith
+sn: Smith
+uid: jane
+userPassword: password
